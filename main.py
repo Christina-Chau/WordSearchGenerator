@@ -63,6 +63,8 @@ if __name__ == '__main__':
         "4": "custom"
     }
 
+    #TODO: Allow users to input custom list of words
+
     modeChosen = get_valid_input(
         "Choose mode (easy[1], medium[2], hard[3], custom[4]): ",
         mode_map.keys()

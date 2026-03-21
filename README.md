@@ -6,7 +6,7 @@ Three modes
 - Medium 20 x 20 around 15 words
 - Hard 30 x 30 20 around 20 words
 
-Users can feed in a list of words that are length of size of grid maximum. Or choose from preselected list
+Users can feed in a list of words that are length of size of grid maximum. Or choose from preselected list.
 The word search is then randomly generated. This word search only outputs a PDF 
 of the search and not meant to be played in program (could be in future iterations).
 
