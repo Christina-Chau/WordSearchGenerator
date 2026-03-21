@@ -1,0 +1,59 @@
+{
+  "category": [
+    {
+      "seasons": [
+        { "winter": [
+            "snow",
+            "ice",
+            "frost",
+            "blizzard",
+            "flake",
+            "chill",
+            "freeze",
+            "sleet",
+            "hail",
+            "storm",
+            "icicle",
+            "snowman",
+            "scarf",
+            "gloves",
+            "coat",
+            "boots",
+            "heater",
+            "fireplace",
+            "sled",
+            "ski",
+            "snowboard",
+            "cabin",
+            "evergreen",
+            "pine",
+            "holly",
+            "reindeer",
+            "penguin",
+            "arctic",
+            "north",
+            "solstice"
+        ] },
+        { "spring": [] },
+        { "summer": [] },
+        { "fall": [] }
+      ]
+    },
+    {
+      "holidays": [
+        { "valentines": [] },
+        { "christmas": [] },
+        { "halloween": [] },
+        { "new years": [] },
+        { "thanksgiving": [] }
+      ]
+    },
+    {
+      "animals": [
+        { "sea animals": [] },
+        { "land animals": [] },
+        { "pets": [] }
+      ]
+    }
+  ]
+}
