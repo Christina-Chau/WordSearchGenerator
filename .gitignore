@@ -1,0 +1,7 @@
+WordBanks/
+.idea/
+
+# virtalenv
+.venv/
+venv/
+ENV/
