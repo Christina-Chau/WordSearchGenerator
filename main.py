@@ -51,47 +51,9 @@ def save_game_to_file(game, sub_category, word_bank, filename):
     pdf.output(filepath)
     print(f"Saved PDF to {filename}")
 
-
-
-if __name__ == '__main__':
-    print("Hello! Welcome to the word search! To quit the process at any time, type 'q'")
-
-    mode_map = {
-        "1": 10,
-        "2": 20,
-        "3": 30,
-        "4": "custom"
-    }
-
-    #TODO: Allow users to input custom list of words
-
-    modeChosen = get_valid_input(
-        "Choose mode (easy[1], medium[2], hard[3], custom[4]): ",
-        mode_map.keys()
-    )
-
-    #TODO: if mode is 4, allow to enter size of board less than 50
-
-    size = mode_map[modeChosen]
-
-    category_map = {
-        "1": "seasons",
-        "2": "holidays",
-        "3": "animals",
-        "4": "custom"
-    }
-
-    categoryChosen = get_valid_input(
-        "Choose category (seasons[1], holidays[2], animals[3], custom[4]): ",
-        category_map.keys()
-    )
-
-    #TODO: if custom then add in user input and allow them to generate custom category
-
-    cat = category_map[categoryChosen]
-
-    wb = WordBank(size=size)
-    subs = wb.get_subcategories(cat)
+def get_word_bank(category, word_size):
+    wb = WordBank(size=word_size)
+    subs = wb.get_subcategories(category)
 
     print("\nChoose a subcategory:")
     for i, sub in enumerate(subs, start=1):
@@ -106,9 +68,75 @@ if __name__ == '__main__':
 
     selected_sub = subs[int(sub_choice) - 1]
 
-    print(f"\nYou selected: {cat} → {selected_sub}")
+    print(f"\nYou selected: {category} → {selected_sub}")
 
-    word_bank = wb.get_words(cat, selected_sub)
+    return wb.get_words(category, selected_sub)
+
+def get_and_validate_word_bank(word_size):
+    wb = WordBank(size=word_size)
+    words = input("Enter a list of words separated by commas: ").split(",")
+    return wb.validate_words(words)
+
+if __name__ == '__main__':
+    print("Hello! Welcome to the word search! To quit the process at any time, type 'q'")
+
+    mode_map = {
+        "1": 10,
+        "2": 20,
+        "3": 30,
+        "4": "custom"
+    }
+
+    modeChosen = get_valid_input(
+        "Choose mode (easy[1], medium[2], hard[3], custom[4]): ",
+        mode_map.keys()
+    )
+
+    size = 0
+    if modeChosen == '4':
+        while True:
+            custom_board_size = int(input("Enter board size between 5 and 50: "))
+            if custom_board_size < 5 or custom_board_size > 50:
+                print("Invalid input, try again")
+            else:
+                size = custom_board_size
+                break
+    else:
+        size = mode_map[modeChosen]
+
+    category_map = {
+        "1": "seasons",
+        "2": "holidays",
+        "3": "animals",
+        "4": "custom"
+    }
+
+    categoryChosen = get_valid_input(
+        "Choose category (seasons[1], holidays[2], animals[3], custom[4]): ",
+        category_map.keys()
+    )
+
+    word_bank = []
+    cat = category_map[categoryChosen]
+    if categoryChosen == '4':
+        custom_map = {
+            "1": "list",
+            "2": "prompt",
+            "q" : "quit"
+        }
+        customChosen = get_valid_input(
+            "Choose whether you want to enter a custom list of words (at most 30 words)[1] or a custom prompt[2]: ",
+            custom_map.keys()
+        )
+        if customChosen == '1':
+            word_bank = get_and_validate_word_bank(size)
+        else:
+            #TODO: Add in prompt generation
+            print("Not yet supported")
+            sys.exit(0)
+    else:
+        word_bank = get_word_bank(cat, size)
+
     print("\nList of words for game: ")
     print(word_bank)
     print("\n Generating game")
@@ -118,6 +146,7 @@ if __name__ == '__main__':
     print("\nGame created")
     print(create_board)
 
+    #TODO: Ask if use wants to save board or not
     file_name = input("Enter file name to save: ")
     save_game_to_file(game, cat, word_bank, file_name)
     print("\nGame saved")

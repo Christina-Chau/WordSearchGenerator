@@ -30,7 +30,9 @@ Categories
 The existing word bank is saved in json file
 
 ## To Run the Program
+Create a virtual environment
 ```bash
-pip3 install -r src/requirements.pip
+source <venv>/bin/activate
+pip3 install -r equirements.pip
 python main.py #to run the game
 ```

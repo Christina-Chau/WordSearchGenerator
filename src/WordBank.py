@@ -29,3 +29,14 @@ class WordBank:
 
                         return words[:num_words]
         return []
+
+    def validate_words(self, words):
+        sanitized_words = []
+        for word in words:
+            word = word.strip()
+            if len(word) <= self.size:
+                sanitized_words.append(word)
+
+        if len(sanitized_words) == 0:
+            raise ValueError("There are no words that fit the size board chosen")
+        return sanitized_words
