@@ -130,6 +130,7 @@ if __name__ == '__main__':
         )
         if customChosen == '1':
             word_bank = get_and_validate_word_bank(size)
+            #TODO: Allow users to save their word bank for the future
         else:
             #TODO: Add in prompt generation
             print("Not yet supported")

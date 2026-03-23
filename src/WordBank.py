@@ -39,4 +39,6 @@ class WordBank:
 
         if len(sanitized_words) == 0:
             raise ValueError("There are no words that fit the size board chosen")
+        elif len(sanitized_words) > 30:
+            raise ValueError("List of words is too big")
         return sanitized_words
