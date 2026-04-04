@@ -16,7 +16,7 @@ class Game:
         return True
 
     def place_word(self, word):
-        word = word.strip()
+        word = "".join(word.split())
         placed = False
         attempts = 0
         max_attempts = 100

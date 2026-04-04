@@ -1,5 +1,6 @@
 import os
 import sys
+import json
 
 from src.Game import Game
 from src.WordBank import WordBank
@@ -10,7 +11,7 @@ def get_valid_input(prompt, valid_options):
         choice = input(prompt)
         if choice == "q":
             sys.exit(0)
-        if choice in valid_options:
+        if choice.lower() in valid_options:
             return choice
         print("Invalid input, try again")
 
@@ -77,6 +78,26 @@ def get_and_validate_word_bank(word_size):
     words = input("Enter a list of words separated by commas: ").split(",")
     return wb.validate_words(words)
 
+def save_word_bank(words):
+    save = get_valid_input("Do you want to save your list of words for the future? [Y/N]", ["y", "n"])
+    if save.lower() == "y":
+        save = input("Enter category name for your list of words: ")
+        with open('src/wordBank.json', 'r') as file:
+            data = json.load(file)
+
+        new_custom = {
+            save: words
+        }
+
+        for item in data["category"]:
+            if "custom" in item:
+                item["custom"].append(new_custom)
+
+        with open('src/wordBank.json', 'w') as file:
+            json.dump(data, file, indent=2)
+    else:
+        return
+
 if __name__ == '__main__':
     print("Hello! Welcome to the word search! To quit the process at any time, type 'q'")
 
@@ -104,6 +125,7 @@ if __name__ == '__main__':
     else:
         size = mode_map[modeChosen]
 
+    #TODO make this not hard coded
     category_map = {
         "1": "seasons",
         "2": "holidays",
@@ -130,7 +152,7 @@ if __name__ == '__main__':
         )
         if customChosen == '1':
             word_bank = get_and_validate_word_bank(size)
-            #TODO: Allow users to save their word bank for the future
+            save_word_bank(word_bank)
         else:
             #TODO: Add in prompt generation
             print("Not yet supported")
@@ -147,7 +169,10 @@ if __name__ == '__main__':
     print("\nGame created")
     print(create_board)
 
-    #TODO: Ask if use wants to save board or not
-    file_name = input("Enter file name to save: ")
-    save_game_to_file(game, cat, word_bank, file_name)
-    print("\nGame saved")
+    save_result = get_valid_input("Do you want to save the game to a file? (Y/N)", ["y", "n"])
+    if save_result == "Y":
+        file_name = input("Enter file name to save: ")
+        save_game_to_file(game, cat, word_bank, file_name)
+        print("\nGame saved")
+    else:
+        print("\nThanks for playing")
