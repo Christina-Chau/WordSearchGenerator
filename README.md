@@ -1,5 +1,6 @@
 # Word Search
-Built in Python 3.14, this is a custom word search program.
+Built in Python 3.14, this is a custom word search program. 
+Currently in the works is a CNN that will try to solve a word search.
 
 ## Developer Setup
 
@@ -10,6 +11,7 @@ Built in Python 3.14, this is a custom word search program.
 ```bash
 source <venv>/bin/activate
 pip3 install -r requirements.pip
+cd wordsearch_generator
 python main.py #to run the game
 ```
 
@@ -51,3 +53,7 @@ Categories
 - Custom (if the user has previously created and wanted to save the list of words)
 
 The existing word bank is saved in json file in WordBanks folder.
+
+## The CNN Model
+### Resources
+- https://arxiv.org/html/1806.10866v2

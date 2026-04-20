@@ -68,8 +68,8 @@ def save_game_to_file(game, sub_category, bank, filename):
     pdf.set_draw_color(0, 0, 0)
     pdf.set_line_width(0.2)
 
-    os.makedirs("WordBanks", exist_ok=True)
-    filepath = os.path.join("WordBanks", filename)
+    os.makedirs("../WordBanks", exist_ok=True)
+    filepath = os.path.join("../WordBanks", filename)
     pdf.output(filepath)
     print(f"Saved PDF to {filename}")
 
