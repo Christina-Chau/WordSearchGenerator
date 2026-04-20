@@ -46,3 +46,18 @@ class WordBank:
             raise ValueError("List of words is too big")
         self.bank = sanitized_words
         return sanitized_words
+
+    def save_to_word_bank(self, words, name):
+        with open('src/wordBank.json', 'r') as file:
+            data = json.load(file)
+
+        new_custom = {
+            name: words
+        }
+
+        for item in data["category"]:
+            if "custom" in item:
+                item["custom"].append(new_custom)
+
+        with open('src/wordBank.json', 'w') as file:
+            json.dump(data, file, indent=2)

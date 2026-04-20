@@ -22,7 +22,7 @@ def validate_filename(filename):
         filename = filename + ".pdf"
     return filename
 
-def save_game_to_file(game, sub_category, word_bank, filename):
+def save_game_to_file(game, sub_category, bank, filename):
     filename = validate_filename(filename)
 
     pdf = FPDF()
@@ -37,7 +37,7 @@ def save_game_to_file(game, sub_category, word_bank, filename):
 
     pdf.set_font("Arial", "", 12)
     pdf.cell(0, 10, "Words to Find:", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
-    words_line = ", ".join(word_bank)
+    words_line = ", ".join(bank)
     pdf.multi_cell(0, 8, words_line)
     pdf.ln(5)
 
@@ -53,8 +53,8 @@ def save_game_to_file(game, sub_category, word_bank, filename):
     pdf.output(filepath)
     print(f"Saved PDF to {filename}")
 
-def get_word_bank(category, word_bank):
-    subs = word_bank.get_subcategories(category)
+def get_word_bank(category, bank):
+    subs = bank.get_subcategories(category)
 
     print("\nChoose a subcategory:")
     for i, sub in enumerate(subs, start=1):
@@ -73,27 +73,15 @@ def get_word_bank(category, word_bank):
 
     return word_bank.get_words(category, selected_sub)
 
-def get_and_validate_word_bank(word_bank):
+def get_and_validate_word_bank(bank):
     words = input("Enter a list of words separated by commas: ").split(",")
-    return word_bank.validate_words(words)
+    return bank.validate_words(words)
 
-def save_word_bank(words):
+def save_to_word_bank(words, bank):
     save = get_valid_input("Do you want to save your list of words for the future? [Y/N]", ["y", "n"])
     if save.lower() == "y":
-        save = input("Enter category name for your list of words: ")
-        with open('src/wordBank.json', 'r') as file:
-            data = json.load(file)
-
-        new_custom = {
-            save: words
-        }
-
-        for item in data["category"]:
-            if "custom" in item:
-                item["custom"].append(new_custom)
-
-        with open('src/wordBank.json', 'w') as file:
-            json.dump(data, file, indent=2)
+        save_name = input("Enter category name for your list of words: ")
+        bank.save_to_word_bank(words, save_name)
     else:
         return
 
@@ -150,7 +138,7 @@ if __name__ == '__main__':
         )
         if customChosen == '1':
             words_for_game = get_and_validate_word_bank(word_bank)
-            save_word_bank(words_for_game)
+            save_to_word_bank(words_for_game, word_bank)
         else:
             #TODO: Add in prompt generation
             print("Not yet supported")
