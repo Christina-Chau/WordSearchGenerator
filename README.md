@@ -1,6 +1,27 @@
 # Word Search
 Built in Python 3.14, this is a custom word search program.
 
+## Developer Setup
+
+### Prerequisites
+- Python 3.14
+
+### Create a virtual environment
+```bash
+source <venv>/bin/activate
+pip3 install -r requirements.pip
+python main.py #to run the game
+```
+
+## To Utilize the Custom Prompt Generator
+This program has the option to generate a list of words with a custom prompt entered in using openAI through OpenRouter. The dependency is listed in the requirements.pip file.
+Create a .env folder and add a key from OpenRouter
+```bash
+OPENROUTER_API_KEY=<insert key here>
+```
+Run ``source .env`` to import the key. For more information: https://openrouter.ai/openai/gpt-oss-120b:free
+
+## Game Breakdown
 Four modes
 - Easy 10 x 10 around 10 words
 - Medium 20 x 20 around 15 words
@@ -30,19 +51,3 @@ Categories
 - Custom (if the user has previously created and wanted to save the list of words)
 
 The existing word bank is saved in json file in WordBanks folder.
-
-## To Run the Program
-Create a virtual environment
-```bash
-source <venv>/bin/activate
-pip3 install -r requirements.pip
-python main.py #to run the game
-```
-
-## To Utilize the Custom Prompt Generator
-This program has the option to generate a list of words with a custom prompt entered in using openAI. The dependency is listed in the requirements.pip file.
-Create a .env folder and add
-```bash
-OPENAI_API_KEY=<insert key here>
-```
-Run ``source .env`` to import the key
