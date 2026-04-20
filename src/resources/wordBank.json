@@ -2,78 +2,441 @@
   "category": [
     {
       "seasons": [
-        { "winter": [
-            "snow","ice","frost","blizzard","flake","chill","freeze","sleet","hail","storm",
-            "icicle","snowman","scarf","gloves","coat","boots","heater","fireplace","sled","ski",
-            "snowboard","cabin","evergreen","pine","holly","reindeer","penguin","arctic","north","solstice"
-        ] },
-        { "spring": [
-            "bloom","flower","rain","sprout","garden","butterfly","bee","blossom","tulip","rose",
-            "daffodil","lily","pollen","green","grass","sunshine","breeze","nest","eggs","chick",
-            "rainbow","cloud","shower","seed","growth","fresh","branch","tree","meadow","season"
-        ] },
-        { "summer": [
-            "sun","beach","heat","vacation","swim","pool","ocean","sand","surf","island",
-            "picnic","barbecue","grill","lemonade","icecream","sunscreen","flipflop","camp","tent","hike",
-            "travel","roadtrip","firefly","sunset","palm","wave","kayak","boat","fishing","relax"
-        ] },
-        { "fall": [
-            "autumn","leaf","pumpkin","harvest","corn","apple","cider","scarecrow","hay","stack",
-            "orange","yellow","brown","crisp","cool","wind","forest","acorn","squirrel","turkey",
-            "rake","pile","bonfire","jacket","sweater","maple","branch","trail","season","festival"
-        ] }
+        {
+          "winter": [
+            "snow",
+            "ice",
+            "frost",
+            "blizzard",
+            "flake",
+            "chill",
+            "freeze",
+            "sleet",
+            "hail",
+            "storm",
+            "icicle",
+            "snowman",
+            "scarf",
+            "gloves",
+            "coat",
+            "boots",
+            "heater",
+            "fireplace",
+            "sled",
+            "ski",
+            "snowboard",
+            "cabin",
+            "evergreen",
+            "pine",
+            "holly",
+            "reindeer",
+            "penguin",
+            "arctic",
+            "north",
+            "solstice"
+          ]
+        },
+        {
+          "spring": [
+            "bloom",
+            "flower",
+            "rain",
+            "sprout",
+            "garden",
+            "butterfly",
+            "bee",
+            "blossom",
+            "tulip",
+            "rose",
+            "daffodil",
+            "lily",
+            "pollen",
+            "green",
+            "grass",
+            "sunshine",
+            "breeze",
+            "nest",
+            "eggs",
+            "chick",
+            "rainbow",
+            "cloud",
+            "shower",
+            "seed",
+            "growth",
+            "fresh",
+            "branch",
+            "tree",
+            "meadow",
+            "season"
+          ]
+        },
+        {
+          "summer": [
+            "sun",
+            "beach",
+            "heat",
+            "vacation",
+            "swim",
+            "pool",
+            "ocean",
+            "sand",
+            "surf",
+            "island",
+            "picnic",
+            "barbecue",
+            "grill",
+            "lemonade",
+            "icecream",
+            "sunscreen",
+            "flipflop",
+            "camp",
+            "tent",
+            "hike",
+            "travel",
+            "roadtrip",
+            "firefly",
+            "sunset",
+            "palm",
+            "wave",
+            "kayak",
+            "boat",
+            "fishing",
+            "relax"
+          ]
+        },
+        {
+          "fall": [
+            "autumn",
+            "leaf",
+            "pumpkin",
+            "harvest",
+            "corn",
+            "apple",
+            "cider",
+            "scarecrow",
+            "hay",
+            "stack",
+            "orange",
+            "yellow",
+            "brown",
+            "crisp",
+            "cool",
+            "wind",
+            "forest",
+            "acorn",
+            "squirrel",
+            "turkey",
+            "rake",
+            "pile",
+            "bonfire",
+            "jacket",
+            "sweater",
+            "maple",
+            "branch",
+            "trail",
+            "season",
+            "festival"
+          ]
+        }
       ]
     },
     {
       "holidays": [
-        { "valentines": [
-            "love","heart","cupid","rose","chocolate","candy","date","romance","kiss","hug",
-            "card","gift","flowers","balloon","sweet","pink","red","couple","letter","poem",
-            "affection","darling","valentine","surprise","dinner","perfume","teddy","smile","joy","passion"
-        ] },
-        { "christmas": [
-            "tree","ornament","lights","santa","reindeer","elf","gift","present","stocking","chimney",
-            "snow","carol","bell","wreath","holly","mistletoe","candle","nativity","angel","star",
-            "northpole","sleigh","cookies","milk","wrap","ribbon","garland","fir","celebrate","joy"
-        ] },
-        { "halloween": [
-            "ghost","witch","pumpkin","candy","costume","mask","spider","web","haunt","zombie",
-            "vampire","monster","bat","skull","grave","tomb","night","trick","treat","lantern",
-            "cauldron","broom","fog","shadow","scream","boo","cloak","fang","magic","creepy"
-        ] },
-        { "new years": [
-            "midnight","countdown","celebration","party","confetti","resolution","calendar","clock","toast","cheers",
-            "champagne","ball","timesquare","sparkle","fireworks","year","future","beginning","midnightkiss","music",
-            "dance","gather","friends","family","goals","fresh","start","joy","noise","festive"
-        ] },
-        { "thanksgiving": [
-            "turkey","feast","family","gratitude","thanks","pumpkin","pie","stuffing","gravy","cranberry",
-            "harvest","dinner","table","corn","bread","mashed","potato","greenbeans","holiday","fall",
-            "celebrate","gather","blessing","share","tradition","roast","autumn","napkin","plate","meal"
-        ] }
+        {
+          "valentines": [
+            "love",
+            "heart",
+            "cupid",
+            "rose",
+            "chocolate",
+            "candy",
+            "date",
+            "romance",
+            "kiss",
+            "hug",
+            "card",
+            "gift",
+            "flowers",
+            "balloon",
+            "sweet",
+            "pink",
+            "red",
+            "couple",
+            "letter",
+            "poem",
+            "affection",
+            "darling",
+            "valentine",
+            "surprise",
+            "dinner",
+            "perfume",
+            "teddy",
+            "smile",
+            "joy",
+            "passion"
+          ]
+        },
+        {
+          "christmas": [
+            "tree",
+            "ornament",
+            "lights",
+            "santa",
+            "reindeer",
+            "elf",
+            "gift",
+            "present",
+            "stocking",
+            "chimney",
+            "snow",
+            "carol",
+            "bell",
+            "wreath",
+            "holly",
+            "mistletoe",
+            "candle",
+            "nativity",
+            "angel",
+            "star",
+            "northpole",
+            "sleigh",
+            "cookies",
+            "milk",
+            "wrap",
+            "ribbon",
+            "garland",
+            "fir",
+            "celebrate",
+            "joy"
+          ]
+        },
+        {
+          "halloween": [
+            "ghost",
+            "witch",
+            "pumpkin",
+            "candy",
+            "costume",
+            "mask",
+            "spider",
+            "web",
+            "haunt",
+            "zombie",
+            "vampire",
+            "monster",
+            "bat",
+            "skull",
+            "grave",
+            "tomb",
+            "night",
+            "trick",
+            "treat",
+            "lantern",
+            "cauldron",
+            "broom",
+            "fog",
+            "shadow",
+            "scream",
+            "boo",
+            "cloak",
+            "fang",
+            "magic",
+            "creepy"
+          ]
+        },
+        {
+          "new years": [
+            "midnight",
+            "countdown",
+            "celebration",
+            "party",
+            "confetti",
+            "resolution",
+            "calendar",
+            "clock",
+            "toast",
+            "cheers",
+            "champagne",
+            "ball",
+            "timesquare",
+            "sparkle",
+            "fireworks",
+            "year",
+            "future",
+            "beginning",
+            "midnightkiss",
+            "music",
+            "dance",
+            "gather",
+            "friends",
+            "family",
+            "goals",
+            "fresh",
+            "start",
+            "joy",
+            "noise",
+            "festive"
+          ]
+        },
+        {
+          "thanksgiving": [
+            "turkey",
+            "feast",
+            "family",
+            "gratitude",
+            "thanks",
+            "pumpkin",
+            "pie",
+            "stuffing",
+            "gravy",
+            "cranberry",
+            "harvest",
+            "dinner",
+            "table",
+            "corn",
+            "bread",
+            "mashed",
+            "potato",
+            "greenbeans",
+            "holiday",
+            "fall",
+            "celebrate",
+            "gather",
+            "blessing",
+            "share",
+            "tradition",
+            "roast",
+            "autumn",
+            "napkin",
+            "plate",
+            "meal"
+          ]
+        }
       ]
     },
     {
       "animals": [
-        { "sea animals": [
-            "shark","whale","dolphin","octopus","squid","crab","lobster","seal","walrus","otter",
-            "jellyfish","starfish","seahorse","clam","oyster","eel","stingray","coral","turtle","fish",
-            "anchovy","tuna","salmon","cod","shrimp","krill","narwhal","manatee","orca","urchin"
-        ] },
-        { "land animals": [
-            "lion","tiger","elephant","giraffe","zebra","bear","wolf","fox","deer","moose",
-            "rabbit","kangaroo","koala","panda","leopard","cheetah","hyena","buffalo","rhino","hippo",
-            "monkey","gorilla","chimpanzee","camel","llama","alpaca","horse","donkey","goat","sheep"
-        ] },
-        { "pets": [
-            "dog","cat","hamster","rabbit","parrot","fish","turtle","lizard","ferret","guinea",
-            "kitten","puppy","canary","goldfish","betta","snake","mouse","rat","gerbil","hedgehog",
-            "chinchilla","lovebird","cockatiel","budgie","tarantula","frog","toad","gecko","iguana","hermitcrab"
-        ] }
+        {
+          "sea animals": [
+            "shark",
+            "whale",
+            "dolphin",
+            "octopus",
+            "squid",
+            "crab",
+            "lobster",
+            "seal",
+            "walrus",
+            "otter",
+            "jellyfish",
+            "starfish",
+            "seahorse",
+            "clam",
+            "oyster",
+            "eel",
+            "stingray",
+            "coral",
+            "turtle",
+            "fish",
+            "anchovy",
+            "tuna",
+            "salmon",
+            "cod",
+            "shrimp",
+            "krill",
+            "narwhal",
+            "manatee",
+            "orca",
+            "urchin"
+          ]
+        },
+        {
+          "land animals": [
+            "lion",
+            "tiger",
+            "elephant",
+            "giraffe",
+            "zebra",
+            "bear",
+            "wolf",
+            "fox",
+            "deer",
+            "moose",
+            "rabbit",
+            "kangaroo",
+            "koala",
+            "panda",
+            "leopard",
+            "cheetah",
+            "hyena",
+            "buffalo",
+            "rhino",
+            "hippo",
+            "monkey",
+            "gorilla",
+            "chimpanzee",
+            "camel",
+            "llama",
+            "alpaca",
+            "horse",
+            "donkey",
+            "goat",
+            "sheep"
+          ]
+        },
+        {
+          "pets": [
+            "dog",
+            "cat",
+            "hamster",
+            "rabbit",
+            "parrot",
+            "fish",
+            "turtle",
+            "lizard",
+            "ferret",
+            "guinea",
+            "kitten",
+            "puppy",
+            "canary",
+            "goldfish",
+            "betta",
+            "snake",
+            "mouse",
+            "rat",
+            "gerbil",
+            "hedgehog",
+            "chinchilla",
+            "lovebird",
+            "cockatiel",
+            "budgie",
+            "tarantula",
+            "frog",
+            "toad",
+            "gecko",
+            "iguana",
+            "hermitcrab"
+          ]
+        }
       ]
     },
     {
-      "custom": []
+      "custom": [
+        {
+          "Bridgerton": [
+            "duchess",
+            "ballroom",
+            "regency",
+            "courtship",
+            "silk",
+            "tapestry",
+            "lattice",
+            "gentry",
+            "petticoat",
+            "whispers"
+          ]
+        }
+      ]
     }
   ]
 }

@@ -17,11 +17,13 @@ class Game:
 
     def place_word(self, word):
         word = "".join(word.split())
-        placed = False
         attempts = 0
         max_attempts = 100
 
-        while not placed and attempts < max_attempts:
+        best_option = None
+        best_overlap = -1
+
+        while attempts < max_attempts:
             attempts += 1
             orientation = random.randint(0, 3)
 
@@ -49,11 +51,22 @@ class Game:
                 positions = [(row - i, col + i) for i in range(len(word))]
 
             if self.can_place(positions, placed_word):
-                for i, (r, c) in enumerate(positions):
-                    self.board[r][c] = placed_word[i]
-                placed = True
+                overlap = sum(
+                    1 for i, (r, c) in enumerate(positions)
+                    if self.board[r][c] == placed_word[i]
+                )
 
-        return placed
+                if overlap > best_overlap:
+                    best_overlap = overlap
+                    best_option = (positions, placed_word)
+
+        if best_option:
+            positions, placed_word = best_option
+            for i, (r, c) in enumerate(positions):
+                self.board[r][c] = placed_word[i]
+            return True
+
+        return False
 
     def fill_empty(self):
         for r in range(self.size):
@@ -62,10 +75,15 @@ class Game:
                     self.board[r][c] = random.choice(string.ascii_uppercase)
 
     def create_board(self, words):
+        placed_words = []
+
         for word in words:
-            success = self.place_word(word.upper())
-            if not success:
+            normalized_word = word.upper()
+            if self.place_word(normalized_word):
+                placed_words.append(normalized_word)
+            else:
                 print(f"Warning: Could not place word '{word}'")
 
+        self.word_bank = placed_words
         self.fill_empty()
-        return self.board
+        return self.board, placed_words

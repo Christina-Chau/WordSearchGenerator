@@ -26,33 +26,59 @@ def save_game_to_file(game, sub_category, bank, filename):
     pdf = FPDF()
     pdf.add_page()
 
-    pdf.set_font("Arial", "B", 16)
+    pdf.set_font("Helvetica", "B", 16)
     pdf.cell(0, 10, "Word Search Game", new_x=XPos.LMARGIN, new_y=YPos.NEXT, align="C")
 
-    pdf.set_font("Arial", "I", 12)
+    pdf.set_font("Helvetica", "I", 12)
     pdf.cell(0, 10, f"Category: {sub_category}", new_x=XPos.LMARGIN, new_y=YPos.NEXT, align="C")
     pdf.ln(5)
 
-    pdf.set_font("Arial", "", 12)
+    pdf.set_font("Helvetica", "", 12)
     pdf.cell(0, 10, "Words to Find:", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
-    words_line = ", ".join(bank)
-    pdf.multi_cell(0, 8, words_line)
-    pdf.ln(5)
+
+    col_count = 3
+    col_width = pdf.w / col_count - 10
+    row_height = 8
+
+    for i, word in enumerate(bank):
+        pdf.cell(col_width, row_height, word, border=0)
+        if (i + 1) % col_count == 0:
+            pdf.ln(row_height)
+    pdf.ln(10)
 
     pdf.set_font("Courier", "", 12)
+
     cell_size = 10
+    grid_size = len(game.board)
+
+    grid_width = cell_size * grid_size
+
+    start_x = (pdf.w - grid_width) / 2
+    pdf.set_x(start_x)
+
+    pdf.set_draw_color(200, 200, 200)
+    pdf.set_line_width(0.1)
+
     for row in game.board:
+        pdf.set_x(start_x)
         for item in row:
             pdf.cell(cell_size, cell_size, str(item), border=1, align="C")
         pdf.ln(cell_size)
 
+    pdf.set_draw_color(0, 0, 0)
+    pdf.set_line_width(0.2)
+
     os.makedirs("WordBanks", exist_ok=True)
-    filepath = os.path.join("WordBanks/", filename)
+    filepath = os.path.join("WordBanks", filename)
     pdf.output(filepath)
     print(f"Saved PDF to {filename}")
 
 def get_word_bank(category, bank):
     subs = bank.get_subcategories(category)
+
+    if len(subs) == 0:
+        print("No subcategories exist for this category yet")
+        sys.exit(0)
 
     print("\nChoose a subcategory:")
     for i, sub in enumerate(subs, start=1):
@@ -69,7 +95,7 @@ def get_word_bank(category, bank):
 
     print(f"\nYou selected: {category} → {selected_sub}")
 
-    return word_bank.get_words(category, selected_sub)
+    return bank.get_words(category, selected_sub)
 
 def get_and_validate_word_bank(bank):
     words = input("Enter a list of words separated by commas: ").split(",")
@@ -113,18 +139,22 @@ if __name__ == '__main__':
     word_bank = WordBank(size=size)
 
     category_map = word_bank.get_categories()
+
+    NEW_OPTION = "N"
+
     options = ", ".join(
         f"{name}[{idx}]" for idx, name in category_map.items()
     )
+    options += f", Create new word bank[{NEW_OPTION}]"
 
     categoryChosen = get_valid_input(
         f"Choose category ({options}): ",
-        map(str, category_map.keys())
+        list(map(str, category_map.keys())) + ['n']
     )
 
     words_for_game = []
-    cat = category_map[int(categoryChosen)]
-    if categoryChosen == '3':
+    cat = ''
+    if categoryChosen == 'n' or categoryChosen == 'N':
         custom_map = {
             "1": "list",
             "2": "prompt",
@@ -147,6 +177,7 @@ if __name__ == '__main__':
             cat = prompt
             save_to_word_bank(words_for_game, word_bank)
     else:
+        cat = category_map[int(categoryChosen)]
         words_for_game = get_word_bank(cat, word_bank)
 
     print("\nList of words for game: ")
@@ -154,9 +185,9 @@ if __name__ == '__main__':
     print("\n Generating game")
 
     game = Game(words_for_game, size)
-    create_board = game.create_board(words_for_game)
+    board, words_for_game = game.create_board(words_for_game)
     print("\nGame created")
-    print(create_board)
+    print(board)
 
     save_result = get_valid_input("Do you want to save the game to a file? (Y/N)", ["y", "n"])
     if save_result == "Y" or save_result == "y":
