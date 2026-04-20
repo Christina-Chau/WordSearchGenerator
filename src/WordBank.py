@@ -9,7 +9,10 @@ class WordBank:
             self.bank = json.load(file)
 
     def get_categories(self):
-        return [list(category.keys())[0] for category in self.bank["category"]]
+        return {
+            i: list(category.keys())[0]
+            for i, category in enumerate(self.bank["category"])
+        }
 
     def get_subcategories(self, main_category):
         for category in self.bank["category"]:

@@ -7,6 +7,7 @@ from src.WordBank import WordBank
 from fpdf import FPDF, XPos, YPos
 
 def get_valid_input(prompt, valid_options):
+    print(valid_options)
     while True:
         choice = input(prompt)
         if choice == "q":
@@ -52,9 +53,8 @@ def save_game_to_file(game, sub_category, word_bank, filename):
     pdf.output(filepath)
     print(f"Saved PDF to {filename}")
 
-def get_word_bank(category, word_size):
-    wb = WordBank(size=word_size)
-    subs = wb.get_subcategories(category)
+def get_word_bank(category, word_bank):
+    subs = word_bank.get_subcategories(category)
 
     print("\nChoose a subcategory:")
     for i, sub in enumerate(subs, start=1):
@@ -71,12 +71,11 @@ def get_word_bank(category, word_size):
 
     print(f"\nYou selected: {category} → {selected_sub}")
 
-    return wb.get_words(category, selected_sub)
+    return word_bank.get_words(category, selected_sub)
 
-def get_and_validate_word_bank(word_size):
-    wb = WordBank(size=word_size)
+def get_and_validate_word_bank(word_bank):
     words = input("Enter a list of words separated by commas: ").split(",")
-    return wb.validate_words(words)
+    return word_bank.validate_words(words)
 
 def save_word_bank(words):
     save = get_valid_input("Do you want to save your list of words for the future? [Y/N]", ["y", "n"])
@@ -125,21 +124,20 @@ if __name__ == '__main__':
     else:
         size = mode_map[modeChosen]
 
-    #TODO make this not hard coded
-    category_map = {
-        "1": "seasons",
-        "2": "holidays",
-        "3": "animals",
-        "4": "custom"
-    }
+    word_bank = WordBank(size=size)
 
-    categoryChosen = get_valid_input(
-        "Choose category (seasons[1], holidays[2], animals[3], custom[4]): ",
-        category_map.keys()
+    category_map = word_bank.get_categories()
+    options = ", ".join(
+        f"{name}[{idx}]" for idx, name in category_map.items()
     )
 
-    word_bank = []
-    cat = category_map[categoryChosen]
+    categoryChosen = get_valid_input(
+        f"Choose category ({options}): ",
+        map(str, category_map.keys())
+    )
+
+    words_for_game = []
+    cat = category_map[int(categoryChosen)]
     if categoryChosen == '4':
         custom_map = {
             "1": "list",
@@ -151,28 +149,28 @@ if __name__ == '__main__':
             custom_map.keys()
         )
         if customChosen == '1':
-            word_bank = get_and_validate_word_bank(size)
-            save_word_bank(word_bank)
+            words_for_game = get_and_validate_word_bank(word_bank)
+            save_word_bank(words_for_game)
         else:
             #TODO: Add in prompt generation
             print("Not yet supported")
             sys.exit(0)
     else:
-        word_bank = get_word_bank(cat, size)
+        words_for_game = get_word_bank(cat, word_bank)
 
     print("\nList of words for game: ")
-    print(word_bank)
+    print(words_for_game)
     print("\n Generating game")
 
-    game = Game(word_bank, size)
-    create_board = game.create_board(word_bank)
+    game = Game(words_for_game, size)
+    create_board = game.create_board(words_for_game)
     print("\nGame created")
     print(create_board)
 
     save_result = get_valid_input("Do you want to save the game to a file? (Y/N)", ["y", "n"])
     if save_result == "Y":
         file_name = input("Enter file name to save: ")
-        save_game_to_file(game, cat, word_bank, file_name)
+        save_game_to_file(game, cat, words_for_game, file_name)
         print("\nGame saved")
     else:
         print("\nThanks for playing")
