@@ -71,6 +71,9 @@
             "chinchilla","lovebird","cockatiel","budgie","tarantula","frog","toad","gecko","iguana","hermitcrab"
         ] }
       ]
+    },
+    {
+      "custom": []
     }
   ]
 }

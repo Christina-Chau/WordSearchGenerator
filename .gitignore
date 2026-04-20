@@ -5,3 +5,5 @@ WordBanks/
 .venv/
 venv/
 ENV/
+
+.env

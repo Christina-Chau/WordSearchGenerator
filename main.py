@@ -1,13 +1,11 @@
 import os
 import sys
-import json
 
 from src.Game import Game
 from src.WordBank import WordBank
 from fpdf import FPDF, XPos, YPos
 
 def get_valid_input(prompt, valid_options):
-    print(valid_options)
     while True:
         choice = input(prompt)
         if choice == "q":
@@ -126,7 +124,7 @@ if __name__ == '__main__':
 
     words_for_game = []
     cat = category_map[int(categoryChosen)]
-    if categoryChosen == '4':
+    if categoryChosen == '3':
         custom_map = {
             "1": "list",
             "2": "prompt",
@@ -140,9 +138,11 @@ if __name__ == '__main__':
             words_for_game = get_and_validate_word_bank(word_bank)
             save_to_word_bank(words_for_game, word_bank)
         else:
-            #TODO: Add in prompt generation
-            print("Not yet supported")
-            sys.exit(0)
+            prompt = input("Enter a category you would like to generate words for: ")
+            words_for_game = word_bank.generate_words(prompt, size)
+            if words_for_game:
+                print("Invalid category, goodbye")
+                sys.exit(0)
     else:
         words_for_game = get_word_bank(cat, word_bank)
 

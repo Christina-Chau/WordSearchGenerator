@@ -1,5 +1,6 @@
 import json
 import random
+from config import client
 
 class WordBank:
     def __init__(self, size):
@@ -61,3 +62,41 @@ class WordBank:
 
         with open('src/wordBank.json', 'w') as file:
             json.dump(data, file, indent=2)
+
+    def generate_words(self, category, size):
+        prompt = f"""
+        You are a word generator for a game.
+
+        Task:
+        - Category: "{category}"
+        - Generate exactly {size} SFW words
+
+        If the category is invalid or incomprehensible:
+        - Set "valid" to false
+        - Return an empty list
+
+        Otherwise:
+        - Set "valid" to true
+        - Return a list of words
+
+        Return ONLY valid JSON in this format:
+
+        {{
+          "valid": true,
+          "words": ["word1", "word2"]
+        }}
+        """
+
+        response = client.responses.create(
+            model="gpt-5-mini",
+            input=prompt
+        )
+
+        data = json.loads(response.output_text)
+
+        if not data["valid"]:
+            return None
+
+        self.validate_words(data["words"])
+        self.bank = data["words"]
+        return data["words"]
