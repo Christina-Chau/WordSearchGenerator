@@ -130,6 +130,7 @@ if __name__ == '__main__':
             "2": "prompt",
             "q" : "quit"
         }
+        # TODO: If there are custom inputs saved then display the custom ones as well
         customChosen = get_valid_input(
             "Choose whether you want to enter a custom list of words (at most 30 words)[1] or a custom prompt[2]: ",
             custom_map.keys()
@@ -140,9 +141,11 @@ if __name__ == '__main__':
         else:
             prompt = input("Enter a category you would like to generate words for: ")
             words_for_game = word_bank.generate_words(prompt, size)
-            if words_for_game:
+            if words_for_game is None:
                 print("Invalid category, goodbye")
                 sys.exit(0)
+            cat = prompt
+            save_to_word_bank(words_for_game, word_bank)
     else:
         words_for_game = get_word_bank(cat, word_bank)
 
@@ -156,7 +159,7 @@ if __name__ == '__main__':
     print(create_board)
 
     save_result = get_valid_input("Do you want to save the game to a file? (Y/N)", ["y", "n"])
-    if save_result == "Y":
+    if save_result == "Y" or save_result == "y":
         file_name = input("Enter file name to save: ")
         save_game_to_file(game, cat, words_for_game, file_name)
         print("\nGame saved")

@@ -6,7 +6,7 @@ class WordBank:
     def __init__(self, size):
         self.size = size
 
-        with open("src/wordBank.json", "r", encoding="utf-8") as file:
+        with open("src/resources/wordBank.json", "r", encoding="utf-8") as file:
             self.bank = json.load(file)
 
     def get_categories(self):
@@ -49,7 +49,7 @@ class WordBank:
         return sanitized_words
 
     def save_to_word_bank(self, words, name):
-        with open('src/wordBank.json', 'r') as file:
+        with open('src/resources/wordBank.json', 'r') as file:
             data = json.load(file)
 
         new_custom = {
@@ -60,41 +60,58 @@ class WordBank:
             if "custom" in item:
                 item["custom"].append(new_custom)
 
-        with open('src/wordBank.json', 'w') as file:
+        with open('src/resources/wordBank.json', 'w') as file:
             json.dump(data, file, indent=2)
 
+
     def generate_words(self, category, size):
-        prompt = f"""
-        You are a word generator for a game.
-
-        Task:
-        - Category: "{category}"
-        - Generate exactly {size} SFW words
-
-        If the category is invalid or incomprehensible:
-        - Set "valid" to false
-        - Return an empty list
-
-        Otherwise:
-        - Set "valid" to true
-        - Return a list of words
-
-        Return ONLY valid JSON in this format:
-
-        {{
-          "valid": true,
-          "words": ["word1", "word2"]
-        }}
         """
+            generate_words() generates a list of words using openAI gpt model
 
-        response = client.responses.create(
-            model="gpt-5-mini",
-            input=prompt
+            :param category: a String of user input for category
+            :param size: size of the board which also determines the maximum length of a word
+            :return: list of words that are generated
+            """
+        print("Generating...")
+        messages = [
+            {
+                "role": "system",
+                "content": "You are a JSON-only API. Return strictly valid JSON."
+            },
+            {
+                "role": "user",
+                "content": f"""
+                    Category: "{category}"
+                    Generate exactly {size} safe-for-work words of length {size} maximum.
+                    
+                    If the category is invalid or incomprehensible:
+                    - Set "valid" to false
+                    - Return an empty list
+                
+                    Return:
+                    {{
+                      "valid": boolean,
+                      "words": string[]
+                    }}
+                    """
+            }
+        ]
+
+        response = client.chat.completions.create(
+            model="openai/gpt-oss-120b:free",
+            messages=messages,
+            temperature=0
         )
 
-        data = json.loads(response.output_text)
+        content = response.choices[0].message.content
+        print("Content:", content)
 
-        if not data["valid"]:
+        try:
+            data = json.loads(content)
+        except Exception:
+            return None
+
+        if not data.get("valid"):
             return None
 
         self.validate_words(data["words"])
