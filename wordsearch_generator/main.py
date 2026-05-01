@@ -24,6 +24,7 @@ def save_game_to_file(game, sub_category, bank, filename):
     filename = validate_filename(filename)
 
     pdf = FPDF()
+    pdf.set_auto_page_break(auto=True, margin=10)
     pdf.add_page()
 
     pdf.set_font("Helvetica", "B", 16)
@@ -37,23 +38,32 @@ def save_game_to_file(game, sub_category, bank, filename):
     pdf.cell(0, 10, "Words to Find:", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
 
     col_count = 3
-    col_width = pdf.w / col_count - 10
+    col_width = pdf.epw / col_count
     row_height = 8
 
-    for i, word in enumerate(bank):
-        pdf.cell(col_width, row_height, word, border=0)
-        if (i + 1) % col_count == 0:
-            pdf.ln(row_height)
-    pdf.ln(10)
+    for row_start in range(0, len(bank), col_count):
+        pdf.set_x(pdf.l_margin)
+        for word in bank[row_start:row_start + col_count]:
+            pdf.cell(col_width, row_height, word, border=0)
+        pdf.ln(row_height)
+    pdf.ln(6)
 
-    pdf.set_font("Courier", "", 12)
-
-    cell_size = 10
     grid_size = len(game.board)
+    max_cell_size = 10
+    max_grid_width = pdf.epw
+    max_grid_height = pdf.h - pdf.b_margin - pdf.get_y()
+    cell_size = min(max_cell_size, min(max_grid_width, max_grid_height) / grid_size)
+
+    if cell_size < 4:
+        pdf.add_page()
+        max_grid_height = pdf.h - pdf.t_margin - pdf.b_margin
+        cell_size = min(max_cell_size, min(max_grid_width, max_grid_height) / grid_size)
+
+    grid_font_size = min(12, max(5, cell_size * 1.8))
+    pdf.set_font("Courier", "", grid_font_size)
 
     grid_width = cell_size * grid_size
-
-    start_x = (pdf.w - grid_width) / 2
+    start_x = pdf.l_margin + (pdf.epw - grid_width) / 2
     pdf.set_x(start_x)
 
     pdf.set_draw_color(200, 200, 200)
