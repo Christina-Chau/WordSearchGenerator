@@ -23,6 +23,8 @@ def validate_filename(filename):
 def save_game_to_file(game, sub_category, bank, filename):
     filename = validate_filename(filename)
 
+    bank.sort(key=str.casefold)
+
     pdf = FPDF()
     pdf.set_auto_page_break(auto=True, margin=10)
     pdf.add_page()

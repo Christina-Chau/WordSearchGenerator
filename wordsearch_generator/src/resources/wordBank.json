@@ -435,6 +435,64 @@
             "petticoat",
             "whispers"
           ]
+        },
+        {
+          "Shrek": [
+            "ogre",
+            "donkey",
+            "fairy",
+            "princess",
+            "swamp",
+            "castle",
+            "dragon",
+            "quest",
+            "heroic",
+            "magic",
+            "troll",
+            "laughter",
+            "adventure",
+            "friendship",
+            "storybook",
+            "green",
+            "humor",
+            "villain",
+            "hero",
+            "kingdom",
+            "journey",
+            "enchanted",
+            "battle",
+            "sword",
+            "courage",
+            "legend",
+            "mystic",
+            "whimsical",
+            "fable",
+            "charming"
+          ]
+        },
+        {
+          "Spongebob": [
+            "pineapple",
+            "krustykrab",
+            "patrickstar",
+            "squidward",
+            "sandycheeks",
+            "mrkrabs",
+            "plankton",
+            "jellyfish",
+            "bubblebass",
+            "seaweed",
+            "coralreef",
+            "kelpforest",
+            "anchovies",
+            "goby",
+            "clam",
+            "seashell",
+            "barnacle",
+            "starfish",
+            "seafoam",
+            "harpoon"
+          ]
         }
       ]
     }

@@ -26,8 +26,8 @@ Run ``source .env`` to import the key. For more information: https://openrouter.
 ## Game Breakdown
 Four modes
 - Easy 10 x 10 around 10 words
-- Medium 20 x 20 around 15 words
-- Hard 30 x 30 20 around 20 words
+- Medium 20 x 20 around 20 words
+- Hard 30 x 30 around 30 words
 - A custom board size based on user input
 
 Users can feed in a list of words that are length of size of grid maximum. Or choose from preselected list/ enter in a custom list of words.
