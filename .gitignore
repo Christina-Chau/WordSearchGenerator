@@ -7,3 +7,8 @@ venv/
 ENV/
 
 .env
+
+# folder to save pdf for model
+wordsearch_solver/data/raw_pdfs/
+wordsearch_solver/data/cropped_cells/
+wordsearch_solver/data/rendered_images/
