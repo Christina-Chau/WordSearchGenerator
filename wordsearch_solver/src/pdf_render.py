@@ -45,7 +45,7 @@ def render_pdf(pdf_path, zoom=3):
 
     doc.close()
 
-
+# Runnable main method for testing
 if __name__ == "__main__":
     pdf_files = list(RAW_DIR.glob("*.pdf"))
 

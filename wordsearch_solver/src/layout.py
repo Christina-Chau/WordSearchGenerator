@@ -15,3 +15,9 @@ Why this file exists:
     use fixed or semi-fixed coordinates instead of training a layout detection
     model. This keeps layout logic in one place.
 """
+
+POINTS_PER_MM = 72 / 25.4
+
+
+def mm_to_pixels(mm, zoom):
+    return mm * POINTS_PER_MM * zoom
