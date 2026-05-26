@@ -6,6 +6,7 @@ wordsearch_solver/
     raw_pdfs/          # Original generated word-search PDFs used as input
     rendered_images/   # PDF pages converted into images for computer vision processing
     cropped_cells/     # Individual letter-cell image crops used for training/evaluation
+    pdf_metadata/      # Contains metadata for the pdfs like grid size
 
   src/
     pdf_render.py      # Converts PDFs into raster images
@@ -31,6 +32,12 @@ wordsearch_solver/
 
 If the sub folders in `data/` are not created, create them. This folder stores the pdfs, images, and cells that are 
 created after `pdf_render.py` are called.
+
+### Model Detail
+
+### How to Run
+1. Make sure the folders in `data/` are created
+2. Populate `data/raw_pdfs/` with the word searches generated. At least <x> puzzles should be present
 
 ### Resources
 - https://arxiv.org/html/1806.10866v2

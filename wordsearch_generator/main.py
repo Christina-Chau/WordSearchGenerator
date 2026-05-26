@@ -1,9 +1,15 @@
 import os
 import sys
+import json
+import shutil
 
 from src.Game import Game
 from src.WordBank import WordBank
 from fpdf import FPDF, XPos, YPos
+from pathlib import Path
+
+RAW_PDF_DIR = Path("../wordsearch_solver/src/data/raw_pdfs")
+METADATA_DIR = Path("../wordsearch_solver/src/data/pdf_metadata")
 
 def get_valid_input(prompt, valid_options):
     while True:
@@ -71,6 +77,8 @@ def save_game_to_file(game, sub_category, bank, filename):
     pdf.set_draw_color(200, 200, 200)
     pdf.set_line_width(0.1)
 
+    grid_start_y = pdf.get_y()
+
     for row in game.board:
         pdf.set_x(start_x)
         for item in row:
@@ -80,10 +88,29 @@ def save_game_to_file(game, sub_category, bank, filename):
     pdf.set_draw_color(0, 0, 0)
     pdf.set_line_width(0.2)
 
-    os.makedirs("../WordBanks", exist_ok=True)
-    filepath = os.path.join("../WordBanks", filename)
-    pdf.output(filepath)
-    print(f"Saved PDF to {filename}")
+    wordbank_filepath = os.path.join("../WordBanks", filename)
+    pdf.output(wordbank_filepath)
+
+    solver_pdf_path = RAW_PDF_DIR / filename
+    shutil.copy(wordbank_filepath, solver_pdf_path)
+
+    metadata = {
+        "grid_size": grid_size,
+        "cell_size_mm": cell_size,
+        "start_x_mm": start_x,
+        "start_y_mm": grid_start_y,
+        "solution_grid": game.board,
+        "word_bank": bank
+    }
+
+    meta_path = METADATA_DIR / f"{Path(filename).stem}_metadata.json"
+
+    with open(meta_path, "w") as f:
+        json.dump(metadata, f, indent=2)
+
+    print(f"Saved PDF to {wordbank_filepath}")
+    print(f"Copied PDF to {solver_pdf_path}")
+    print(f"Saved metadata to {meta_path}")
 
 def get_word_bank(category, bank):
     subs = bank.get_subcategories(category)
