@@ -100,7 +100,6 @@ def save_game_to_file(game, sub_category, bank, filename):
         "start_x_mm": start_x,
         "start_y_mm": grid_start_y,
         "solution_grid": game.board,
-        "word_bank": bank
     }
 
     meta_path = METADATA_DIR / f"{Path(filename).stem}_metadata.json"
