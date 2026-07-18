@@ -118,4 +118,4 @@ Cloudflare prints a `https://random-name.trycloudflare.com` URL. Share it and an
    ```
 5. Railway detects the `Procfile` and deploys automatically
 
-> **Note:** The `Procfile` uses `gunicorn -w 1` (single worker). This is required — game state is stored in memory, so multiple workers would each have an isolated state and players would end up in separate games.
+> **Note:** The `Procfile` runs `python app.py` directly using eventlet's built-in server (single process). This is required — game state is stored in memory, so multiple processes would each have isolated state and players would end up in separate games.
