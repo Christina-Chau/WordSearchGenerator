@@ -1,7 +1,6 @@
 import os
 import sys
 import json
-import random
 from contextlib import contextmanager
 
 # ── Resolve wordsearch_generator directory ─────────────────────────────────
