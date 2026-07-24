@@ -1,0 +1,6 @@
+flask>=3.0
+flask-socketio>=5.3
+eventlet>=0.35
+python-dotenv>=1.0
+fpdf2==2.8.7
+openai>=1.0.0
